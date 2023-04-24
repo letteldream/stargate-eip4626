@@ -209,8 +209,7 @@ abstract contract StargateWrapper is ERC4626 {
 
     function totalAssets() public view virtual override returns (uint256) {
         (uint256 lpAmount, ) = stargateFarm.userInfo(farmId, address(this));
-        uint256 stakedTokenAmount = IStargatePool(address(lpToken))
-            .amountLPtoLD(lpAmount);
+        uint256 stakedTokenAmount = lpToken.amountLPtoLD(lpAmount);
 
         return token.balanceOf(address(this)) + stakedTokenAmount;
     }
